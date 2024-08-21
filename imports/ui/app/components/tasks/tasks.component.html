@@ -1,0 +1,29 @@
+ 
+
+<div class="flex align-items-start justify-content-center content bg-blue-50">
+    <div class="surface-section surface-ground md:w-8 mt-5 shadow-3 border-round-md px-2">
+        <div class="w-full md:w-12 mt-5 mb-3 flex align-items-center justify-content-center">
+            <span class="p-float-label md:w-8">
+                <input [(ngModel)]="taskName" (keyup.enter)="addTask()" type="text" id="inputtext" pInputText  class="outline-none"/>
+                <label for="inputtext">Type your task</label>
+            </span>
+        </div>
+        <div *ngIf="(tasksList | async)?.length==0">
+            <h6>No tasks to show</h6>
+        </div>
+        <ul  class="list-none p-0 m-0">
+            <li *ngFor="let task of tasksList | async" class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+                    <p-checkbox (click)="toggleTask(task)" binary="true"  [(ngModel)]="task.completed "></p-checkbox>
+                    {{task.name}}
+                </div>
+                <div class="w-6 md:w-2 flex justify-content-end">
+                    <button (click)="removeTask(task)" pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-text"></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
